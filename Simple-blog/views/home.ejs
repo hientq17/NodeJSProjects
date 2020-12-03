@@ -1,5 +1,8 @@
 <%- include("partials/header") -%>
 <h1>Hello</h1>
 <p><%= content %></p>
-<% posts.foreach %>
+<% posts.forEach((post) => { %>
+    <a class="post-title" href="post/+<%= post.title %>"><h1><%= post.title %></h1></a>
+    <p><%= post.content %><span><a href="post/+<%= post.title %>"> Read more</a></span></p>
+<% }) %>
 <%- include("partials/footer") -%>
