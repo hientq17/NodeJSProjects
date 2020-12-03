@@ -1,0 +1,128 @@
+const: cannot rewrite or define again
+var, let: can rewrite or define again
+// in condition/loop (if/for/while...)
+	var: go through condition and loop
+	const/let: redefine whenever condition/loop back to the begining
+const: it does not proctect element inside var
+//export object/function from the module
+	module.exports.<var_name> = <object/function>
+	module.exports.<var_name> = <function_name(without parentheses)> //export a function
+//load the module: 
+	const <var_name> = require("<module file directory>")
+	<var_name>() //if a function, add parentheses to run
+//Current working file: 
+	__filename
+//Current working directory: 
+	__dirname
+//Template string: 
+	console.log(`Message: ${<var>}`)
+//Access to path module
+	const path = require('path');
+	var pathObj = path.parse(__filename); //get information of file
+	console.log(pathObj);
+//Access to os module
+	const os = require('os');
+	console.log(`Total memory: ${os.totalmem()}`);
+	console.log(`Total memory: ${os.freemem()}`);
+//Access to file system module
+	const fs = require('fs');
+	fs.readdir('./',function(err,files){
+		if(err) console.log(`Error: ${err}`);
+		else console.log(`Result: ${files}`);	
+	});
+//Access to event module
+	const EventEmitter = require('events'); // EvenEmitter is the class, not function/method/object/function
+	const emitter = new EventEmitter();
+	//create an event
+	emitter.on('messageLogged',function(eventArg){
+		console.log(`Listener called ${eventArg}`);
+	});
+	emitter.emit('messageLogged',{id:1, url:'http://'}); //raise an event
+//Use arrow function 
+	emitter.on('messageLogged',(eventArg) => {
+		console.log(`Listener called ${eventArg}`);
+	});
+//Access to http module
+	const http = require('http');
+	const server = http.createServer((req,res) => {
+		if(req.url === '/'){
+			res.write('Hello World');
+		}
+		//pass data to client type objec using JSON
+		if(req.url === '/api/data'){
+			res.write(JSON.stringify([1,2,3]));
+			res.end();
+		}
+	})
+	//server is ready in port 3000
+	server.listen(3000);		
+//Create NPM inside cmd
+	npm init
+//Search package in https://www.npmjs.com/ to install
+//After install, initialize it by using 
+	const <var_name> = require('<package_name>');
+//jshint esversion:6
+//Access to express module
+	npm install express //type in cmd:
+	//in VS code
+	const express = require('express');
+	const app = express(); //initialize express
+	npm install body-parse //type in cmd:
+	const bodyParse = require('body-parse');
+	//must define the public folder to store static files(css,js,img...)
+	app.use(express.static(__dirname + '/public'));
+	//get access data from view(html) as a object inside bracket
+	app.use(bodyParser.urlencoded({extended:true})); 
+	
+	//if using html-views, render html file to ejs and set view engine => html 
+	app.engine('html', require('ejs').renderFile); //render html file to ejs
+	app.set('view engine', 'html'); 
+	app.set('views', __dirname+"/html-views"); //set view directory html-views
+	
+	// else if using ejs-views, only set view engine => ejs
+	app.set('view engine', 'ejs');
+	app.set('views', __dirname+"/ejs-views"); //set view directory ejs-views
+	
+	
+	//method get
+	app.get("/",(req,res) => {
+		res.sendFile(__dirname+"/index.html");
+	})
+	//method post
+	app.post("/",(req,res) => {
+		var num1 = Number(req.body.num1);
+		var num2 = Number(req.body.num2);
+		var result = num1 + num2;
+		//send strings
+		res.send(`The result of ${num1} plus ${num2} is: ${result}`);
+		//send variable to html page
+		res.render('result.html',{locals:{result:result}});
+	})
+	app.listen(3000,()=>{
+		console.log('Server started at port 3000');
+	});
+//upload app to heroku
+    //define a Procfile -> web: node app.js   (app.js is main file to run application)
+	//change port to heroku port
+	app.listen(process.env.PORT || 3000, function(){
+		.......................
+	});
+	//create git
+	git init
+	git add .
+	//create heroku app
+	heroku apps:create <app-name>
+	//commit and push to heroku git
+	git commit -m "Initial commit"
+	git push heroku master
+	//Ensure that at least one instance of the app is running:
+	heroku ps:scale web=1
+	//Open a web
+	heroku open
+//include header or footer ...
+	<%- include("header") -%>
+	<%- include("footer") -%>
+	
+	
+	
+	

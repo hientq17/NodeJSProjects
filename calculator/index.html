@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Calculator</title>
+    </head>
+    <body>
+        <h1>Simple Calculator</h1>
+        <form action="/calculate" id="calculationForm" method="post" id>
+            <label for="num1">First number:</label> &emsp;
+            <input style="margin: 5px" type="text" name="num1" id="num1" placeholder="Enter first Number"/><br>
+            <label for="num2">Second number: </label>
+            <input style="margin: 5px" type="text" name="num2" id="num2" placeholder="Enter second Number"/><br>
+            <input type="hidden" id="calculation" name="calculation"/><br>
+             &emsp;&emsp; &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+            <button id="plus" onclick="change('plus')">+</button>&nbsp;
+            <button id="minus" onclick="change('minus')">-</button>&nbsp;
+            <button id="multiply" onclick="change('multiply')">*</button>&nbsp;
+            <button id="divide" onclick="change('divide')">/</button><br>
+        </form>
+    </body>
+    <script>
+        function change(val){
+            document.getElementById("calculation").value = val;
+            document.getElementById("calculationForm").submit();
+        }
+    </script>
+</html>
+
