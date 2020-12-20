@@ -1,0 +1,112 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    // Check for the File API support.
+    if (window.File && window.FileReader && window.FileList && window.Blob) {
+        document.getElementById('files').addEventListener('change', handleFileSelect, false);
+    } else {
+        alert('The File APIs are not fully supported in this browser.');
+    }
+
+    function handleFileSelect(evt) {
+        var f = evt.target.files[0]; // FileList object
+        var reader = new FileReader();
+        // Closure to capture the file information.
+        reader.onload = (function(theFile) {
+            return function(e) {
+                var binaryData = e.target.result;
+                //Converting Binary Data to base 64
+                var base64String = window.btoa(binaryData);
+                console.log('File converted to base64 successfuly!');
+                const base64 = "data:image/png;base64," + base64String;
+                //call ajax function
+                insertImage(base64);
+            };
+        })(f);
+        // Read in the image file as a data URL.
+        reader.readAsBinaryString(f);
+    }
+
+    function insertImage(base64) {
+        var image = {};
+        image.url = base64;
+        $.ajax({
+            url: '/blog/insertImage',
+            method: 'post',
+            data: JSON.stringify(image),
+            contentType: 'application/json',
+            beforeSend: function() {
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Proccessing...',
+                    text: 'Please wait a moment!',
+                    showConfirmButton: false,
+                    allowOutsideClick: false
+                })
+            },
+            success: function(response) {
+                Swal.close();
+                console.log(JSON.parse(response));
+                appendImage(JSON.parse(response));
+            },
+            error: function(response) {
+                Swal.close();
+                alert('server error occured')
+            }
+        });
+    }
+
+    function appendImage(url) {
+        var divId = "div-" + url;
+        $(".list-images").html($(".list-images").html() +
+            '<div id=' + divId + '>                                                                                                                 ' +
+            ' 	<img src="' + url + '" class="insert-image rounded float-left" width="100px" height="100px">	                                    ' +
+            ' 	<span>Link: </span><input type="text" value="' + url + '" id="' + url + '" style="width: 70%" readonly>                             ' +
+            ' 	<div style="display: inline;">                                                                                                    	' +
+            ' 	    <button title="Copy url" onclick=\'return copyText(this,"' + url + '")\'>Use</button>                                           ' +
+            ' 	    <button title="Delete image" onclick=\'return deleteImage("' + url + '")\'>Delete</button>                                      ' +
+            ' 	</div><br>                                                                                                                        	' +
+            '</div>                                                                                                                                 '
+        )
+    }
+
+    function deleteImage(url) {
+        var image = {};
+        image.url = url;
+        $.ajax({
+            url: '/blog/deleteImage',
+            method: 'post',
+            data: JSON.stringify(image),
+            contentType: 'application/json',
+            beforeSend: function() {
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Proccessing...',
+                    text: 'Please wait a moment!',
+                    showConfirmButton: false,
+                    allowOutsideClick: false
+                })
+            },
+            success: function(response) {
+                Swal.close();
+                // Removes an element from the document
+                var element = document.getElementById("div-" + url);
+                element.parentNode.removeChild(element);
+                console.log(response);
+            },
+            error: function(response) {
+                Swal.close();
+                alert('server error occured')
+            }
+        });
+        return false;
+    }
+
+    function copyText(x, url) {
+        console.log(url);
+        var copyText = document.getElementById(url);
+        copyText.select();
+        copyText.setSelectionRange(0, 99999)
+        document.execCommand("copy");
+        return false;
+    }
+</script>

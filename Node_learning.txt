@@ -112,6 +112,8 @@ const: it does not proctect element inside var
 	git add .
 	//create heroku app
 	heroku apps:create <app-name>
+	//create 
+	heroku git:remote -a <app-name>
 	//commit and push to heroku git
 	git commit -m "Initial commit"
 	git push heroku master
@@ -129,5 +131,6 @@ const: it does not proctect element inside var
 //lodash module
 	npm install lodash //install lodash by cmd
 	var _ = require("lodash");
-	var newStr = _.lowerCase(oldStr); //oldStr to newStr with lower case	
+	var newStr = _.lowerCase(oldStr); //oldStr to newStr with lower case
+	
 	

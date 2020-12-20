@@ -1,0 +1,120 @@
+<%-include('../resource/_stylesheet')%>
+    <div class="container">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <!-- https://sweetalert2.github.io/#download-->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+        <script>
+            var base64 = "";
+            var girlName = "";
+
+            function displayForm() {
+                Swal.fire({
+                    html: '<h1 class="mb-4">Hình ảnh mới</h1>                                                                                                   ' +
+                        '	<label for="img" style="float:left; font-size: 1.5rem">Chọn hình ảnh:</label>														' +
+                        '	<input type="file" style="font-size: 1.5rem" class="form-control" onclick=checkAPI(this) accept="image/*" required><br>				' +
+                        '	<label for="girlName" style="float:left; font-size: 1.5rem">Tên:</label>                                                            ' +
+                        '	<input type="text" style="font-size: 1.5rem"  class="form-control" oninput="getGirlName(this)"></input><br>                         ',
+                    showConfirmButton: true,
+                    showCancelButton: true,
+                    width: 500
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        insertImage();
+                    }
+                })
+            }
+
+            function getGirlName() {
+                girlName = this.value;
+            }
+
+            function checkAPI(x) {
+                // Check for the File API support.
+                if (window.File && window.FileReader && window.FileList && window.Blob) {
+                    x.addEventListener('change', handleFileSelect, false);
+                } else {
+                    alert('The File APIs are not fully supported in this browser.');
+                }
+            }
+
+            function handleFileSelect(evt) {
+                var f = evt.target.files[0]; // FileList object
+                var reader = new FileReader();
+                // Closure to capture the file information.
+                reader.onload = (function(theFile) {
+                    return function(e) {
+                        console.log('size: ' + theFile.size);
+                        if (theFile.size >= 10485760) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'Kích thước ảnh quá lớn!',
+                                footer: 'Kích thước ảnh tối đa: 10485760(10MB).'
+                            })
+                        } else {
+                            var binaryData = e.target.result;
+                            //Converting Binary Data to base 64
+                            var base64String = window.btoa(binaryData);
+                            //showing file converted to base64
+                            base64 = "data:image/png;base64," + base64String;
+                            console.log('File converted to base64 successfuly!');
+                        }
+                    };
+                })(f);
+                // Read in the image file as a data URL.
+                reader.readAsBinaryString(f);
+            }
+
+            function insertImage() {
+                if (base64.length == 0) {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Chưa chọn hình ảnh!',
+                        text: 'Vui lòng chọn hình ảnh để tiếp tục.'
+                    })
+                    return;
+                }
+                var image = {};
+                image.base64 = base64;
+                image.girlName = girlName;
+                $.ajax({
+                    url: '/girl/new',
+                    method: 'post',
+                    data: JSON.stringify(image),
+                    contentType: 'application/json',
+                    beforeSend: function() {
+                        Swal.fire({
+                            icon: 'info',
+                            title: 'Đang thực hiện...',
+                            text: 'Vui lòng chờ tí nhé!',
+                            showConfirmButton: false,
+                            allowOutsideClick: false
+                        })
+                    },
+                    success: function(response) {
+                        Swal.close();
+                        if (JSON.parse(response) == "success") {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Gửi ảnh thành công...',
+                                text: 'Vui lòng chờ duyệt nhé!',
+                                showConfirmButton: true
+                            })
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'Có lỗi xảy ra!',
+                                footer: 'Vui lòng thử lại sau.'
+                            })
+                        }
+                    },
+                    error: function(response) {
+                        Swal.close();
+                        alert('Lỗi server! Vui lòng thử lại sau')
+                    }
+                });
+            }
+        </script>
+    </div>

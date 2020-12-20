@@ -4,6 +4,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const _ = require("lodash");
+const mongoose = require('mongoose');
 
 const homeStartingContent = "Lacus vel facilisis volutpat est velit egestas dui id ornare. Semper auctor neque vitae tempus quam. Sit amet cursus sit amet dictum sit amet justo. Viverra tellus in hac habitasse. Imperdiet proin fermentum leo vel orci porta. Donec ultrices tincidunt arcu non sodales neque sodales ut. Mattis molestie a iaculis at erat pellentesque adipiscing. Magnis dis parturient montes nascetur ridiculus mus mauris vitae ultricies. Adipiscing elit ut aliquam purus sit amet luctus venenatis lectus. Ultrices vitae auctor eu augue ut lectus arcu bibendum at. Odio euismod lacinia at quis risus sed vulputate odio ut. Cursus mattis molestie a iaculis at erat pellentesque adipiscing.";
 const aboutContent = "Hac habitasse platea dictumst vestibulum rhoncus est pellentesque. Dictumst vestibulum rhoncus est pellentesque elit ullamcorper. Non diam phasellus vestibulum lorem sed. Platea dictumst quisque sagittis purus sit. Egestas sed sed risus pretium quam vulputate dignissim suspendisse. Mauris in aliquam sem fringilla. Semper risus in hendrerit gravida rutrum quisque non tellus orci. Amet massa vitae tortor condimentum lacinia quis vel eros. Enim ut tellus elementum sagittis vitae. Mauris ultrices eros in cursus turpis massa tincidunt dui.";
@@ -11,60 +12,166 @@ const contactContent = "Scelerisque eleifend donec pretium vulputate sapien. Rho
 
 const app = express();
 
-app.set('view engine', 'ejs');
-app.set('views', __dirname+"/views"); //set view directory views
+var topicList = [];
+var postList = [];
 
-app.use(bodyParser.urlencoded({extended: true}));
+app.set('view engine', 'ejs');
+app.set('views', __dirname + "/views"); //set view directory views
+
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-const posts = [];
+//create topic schema
+const topicSchema = new mongoose.Schema({
+        name: {
+            type: String,
+            required: [true, 'Topic is empty']
+        }
+    })
+    // Create post schema
+const postSchema = new mongoose.Schema({
+        title: {
+            type: String,
+            required: [true, 'Title is empty']
+        },
+        detail: {
+            type: String,
+            required: [true, 'Detail is empty']
+        },
+        topic: topicSchema
+    })
+    //create model
+const Topics = mongoose.model("topics", topicSchema);
+const Posts = mongoose.model("posts", postSchema);
 
-app.get("/",(req,res) => {
-  console.log(posts);
-  var homePosts = [];
-  posts.forEach((post) => {
-    let newPost = {
-        title: post.title,
-        content: post.content.substring(0,100) + "  . . ."
+const findPosts = async function findPosts() {
+    try {
+        // Connect the client to the server
+        await mongoose.connect("mongodb://localhost:27017/simple-blog", { useNewUrlParser: true, useUnifiedTopology: true });
+        console.log("Connected successfully to server");
+        await Posts.find((err, result) => {
+            if (err) console.log(err);
+            else {
+                postList = result;
+                console.log("Find posts successfully")
+            }
+        })
+    } finally {
+        // Ensures that the client will close when you finish/error
+        await mongoose.connection.close();
     }
-    homePosts.push(newPost);
-  });
-  
-  res.render("home",{content: homeStartingContent, posts: homePosts});
-})
+}
 
-app.get("/post/:postId",(req,res) => {
-  let postId = req.params.postId;
-  var foundPosts = [];
-  posts.forEach((post) => {
-    if(_.lowerCase(post.title)==_.lowerCase(postId)){
-      foundPosts.push(post);
+const findTopics = async function findTopics() {
+    try {
+        // Connect the client to the server
+        await mongoose.connect("mongodb://localhost:27017/simple-blog", { useNewUrlParser: true, useUnifiedTopology: true });
+        console.log("Connected successfully to server");
+        await Topics.find((err, result) => {
+            if (err) console.log(err);
+            else {
+                topicList = result;
+                console.log("Find topics successfully")
+            }
+        })
+    } finally {
+        // Ensures that the client will close when you finish/error
+        await mongoose.connection.close();
     }
-    res.render("post",{posts: foundPosts});
-  });
+}
+
+const insertPost = async function insertPost(p) {
+    try {
+        // Connect the client to the server
+        await mongoose.connect("mongodb://localhost:27017/simple-blog", { useNewUrlParser: true, useUnifiedTopology: true });
+        console.log("Connected successfully to server");
+        var post = new Posts({
+            title: p.title,
+            detail: p.detail,
+            topic: p.topic
+        })
+        await post.save();
+        await findPosts();
+    } finally {
+        // Ensures that the client will close when you finish/error
+        await mongoose.connection.close();
+    }
+}
+
+const init = async function init() {
+    await findTopics();
+    await findPosts();
+}
+
+init();
+
+app.get("/", (req, res) => {
+    var homePosts = [];
+    postList.forEach((post) => {
+        let newPost = {
+            _id: post._id,
+            title: post.title,
+            detail: post.detail.substring(0, 100) + "  . . .",
+            topic: post.topic
+        }
+        homePosts.push(newPost);
+    });
+    res.render("home", { content: homeStartingContent, posts: homePosts });
 })
 
-app.get("/about",(req,res) => {
-  res.render("about",{content: aboutContent});
+app.get("/post/:postId", (req, res) => {
+    let postId = req.params.postId;
+    var foundPosts = [];
+    postList.forEach((post) => {
+        if (_.lowerCase(post.title) == _.lowerCase(postId)) {
+            foundPosts.push(post);
+        }
+    });
+    res.render("post", { posts: foundPosts });
 })
 
-app.get("/contact",(req,res) => {
-  res.render("contact",{content: contactContent});
+app.get("/topic/:name", (req, res) => {
+    let name = req.params.name;
+    var foundPosts = [];
+    postList.forEach((post) => {
+        if (_.lowerCase(post.topic.name) == _.lowerCase(name)) {
+            foundPosts.push(post);
+            console.log(post.topic.name);
+        }
+    });
+    res.render("home", { content: homeStartingContent, posts: foundPosts });
 })
 
-app.get("/compose",(req,res) => {
-  res.render("compose");
+app.get("/about", (req, res) => {
+    res.render("about", { content: aboutContent });
 })
 
-app.post("/compose",(req,res) => {
-  let p = {
-    title: req.body.title,
-    content: req.body.content
-  }
-  posts.push(p);
-  res.redirect("/");
+app.get("/contact", (req, res) => {
+    res.render("contact", { content: contactContent });
+})
+
+app.get("/compose", (req, res) => {
+    res.render("compose", { topics: topicList });
+})
+
+app.post("/compose", (req, res) => {
+    var topicName = req.body.topic;
+    var topic = null;
+    topicList.forEach(top => {
+        if (_.lowerCase(top.name) == _.lowerCase(topicName)) {
+            topic = top;
+            return;
+        }
+    })
+    let p = {
+        title: req.body.title,
+        detail: req.body.detail,
+        topic: topic
+    }
+    insertPost(p);
+    res.redirect("/");
 })
 
 app.listen(3000, function() {
-  console.log("Server started on port 3000");
+    console.log("Server started on port 3000");
 });

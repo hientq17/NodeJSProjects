@@ -3,8 +3,14 @@
 <form action="/compose" method="POST" width="100%">
     <label for="title">Title</label><br>
     <input type="text" name="title" style="width:60%"/><br>
-    <label for="content">Content</label><br>
-    <textarea type="text" name="content" rows="6" style="width:60%"></textarea><br>
+    <label for="detail">Detail</label><br>
+    <textarea type="text" name="detail" rows="6" style="width:60%"></textarea><br>
+    <label for="topic">Topic: </label>
+    <select name="topic" style="width: 20%">
+        <% topics.forEach((topic) => { %>
+            <option value="<%= topic.name %>"><%= topic.name %></option>
+        <% }) %> 
+      </select><br><br>
     <button style="background-color:rgb(4, 4, 150); color: white" type="submit">Publish</button>
 </form>
 <%- include("partials/footer") -%>

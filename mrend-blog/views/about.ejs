@@ -1,0 +1,93 @@
+<%- include("partials/header") -%>
+    <script>
+        document.getElementById('about-nav').classList.add("fh5co-active");
+    </script>
+
+    <div id="fh5co-main">
+        <div class="fh5co-narrow-content">
+            <div class="row row-bottom-padded-md">
+                <div class="col-md-5 animate-box" data-animate-effect="fadeInLeft">
+                    <img class="img-responsive" src="<%= contact.image %>">
+                </div>
+                <div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
+                    <h2 class="fh5co-heading">Giới thiệu về tôi</h2>
+                    <p>
+                        <%= contact.description %>
+                    </p>
+                </div>
+            </div>
+            <a href="<%= contact.cv %>" target="_blank" style="text-transform: uppercase; letter-spacing: 2px; color: #000" onmouseover="this.style.color ='blue'" onmouseout="this.style.color =' #000'">
+                Xem CV của tôi 
+                <i class=" icon-arrow-right3 "></i>
+            </a>
+        </div>
+
+        <div class="fh5co-narrow-content" style="display: none;">
+            <h2 class="fh5co-heading animate-box" data-animate-effect="fadeInLeft">Our Services</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="fh5co-feature animate-box" data-animate-effect="fadeInLeft">
+                        <div class="fh5co-icon">
+                            <i class="icon-settings"></i>
+                        </div>
+                        <div class="fh5co-text">
+                            <h3>Strategy</h3>
+                            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="fh5co-feature animate-box" data-animate-effect="fadeInLeft">
+                        <div class="fh5co-icon">
+                            <i class="icon-search4"></i>
+                        </div>
+                        <div class="fh5co-text">
+                            <h3>Explore</h3>
+                            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="fh5co-feature animate-box" data-animate-effect="fadeInLeft">
+                        <div class="fh5co-icon">
+                            <i class="icon-paperplane"></i>
+                        </div>
+                        <div class="fh5co-text">
+                            <h3>Direction</h3>
+                            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="fh5co-feature animate-box" data-animate-effect="fadeInLeft">
+                        <div class="fh5co-icon">
+                            <i class="icon-params"></i>
+                        </div>
+                        <div class="fh5co-text">
+                            <h3>Expertise</h3>
+                            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="fh5co-narrow-content">
+            <div class="row">
+                <div class="col-md-4 animate-box" data-animate-effect="fadeInLeft">
+                    <h1 class="fh5co-heading-colored">Tìm hiểu thêm</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 col-md-pull-3 animate-box" data-animate-effect="fadeInLeft">
+                    <p class="fh5co-lead">Bạn nào muốn biết thêm thông tin chi tiết đừng ngần ngại liên hệ cho mình nhé!</p>
+                    <p><a href="https://web.facebook.com/nhochiennhoc/" target="_blank" class="btn btn-primary">Thêm nữa</a></p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <%- include("partials/footer.ejs") -%>

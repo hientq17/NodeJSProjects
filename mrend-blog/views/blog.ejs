@@ -1,0 +1,92 @@
+<%- include("partials/header") -%>
+    <script>
+        document.getElementById('blog-nav').classList.add("fh5co-active");
+    </script>
+    <div id="fh5co-main">
+        <div class="fh5co-narrow-content">
+            <h2 class="fh5co-heading animate-box " data-animate-effect="fadeInLeft">Blog của tôi</h2>
+            <div class="row row-bottom-padded-md">
+                <% posts.forEach( post => { %>
+                    <div class="col-md-3 col-sm-6 col-padding animate-box" data-animate-effect="fadeInLeft">
+                        <div class="blog-entry">
+                            <a href="/blog/post/<%= post.id %>" class="blog-img"><img src="<%= post.thumbnail %>" class="img-responsive"></a>
+                            <div class="desc">
+                                <span><small>by <%= post.author %> </small> / <small> <%= post.topic.name %> </small> / 
+                                    <small> <%= moment(post.date).format('DD-MM-YYYY') %></small></span>
+                                <h5>
+                                    <a href="/blog/post/<%= post.id %>">
+                                        <%= post.title %>
+                                    </a>
+                                </h5>
+                                <a href="/blog/post/<%= post.id %>" class="lead">Xem thêm <i class="icon-arrow-right3"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <% }) %>
+            </div>
+
+            <nav aria-label="..." style="font-size: 1.5rem;width: 30%; margin: auto">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="pagination-page-link" href="/blog/page<%= pagination.pageNum - 1 %>" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+                    <li class="page-item active"><a class="pagination-page-link" href="/blog/page1">1</a></li>
+                    <% for(i=2; i<=pagination.pageTotal; i++) { %>
+                        <li class="page-item">
+                            <a class="pagination-page-link" href="/blog/page<%= i %>">
+                                <%= i %>
+                            </a>
+                        </li>
+                        <% } %>
+                            <li class="page-item">
+                                <a class="pagination-page-link" href="/blog/page<%= parseInt(pagination.pageNum) + 1 %>" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </li>
+                </ul>
+            </nav>
+        </div>
+
+        <div>
+            <input type="hidden" id="pageNum" value="<%= pagination.pageNum %>" />
+            <script>
+                //highlight the current
+                $(".page-item").each(function(index, element) {
+                    $(element).removeClass('active');
+                });
+                $(".page-item").eq($('#pageNum').val()).addClass('active');
+            </script>
+        </div>
+        <div>
+            <% if(!pagination.prev){ %>
+                <script>
+                    //disable previous button
+                    $(".page-item").eq(0).addClass('disabled');
+                    $(".pagination-page-link").eq(0).removeAttr("href");
+                </script>
+                <% } %>
+        </div>
+        <div>
+            <input type="hidden" id="pageNext" value="<%= pagination.pageTotal+1 %>" />
+            <% if(!pagination.next ){ %>
+                <script>
+                    //disable next button
+                    $(".page-item").eq($('#pageNext').val()).addClass('disabled');
+                    $(".pagination-page-link").eq($('#pageNext').val()).removeAttr("href");
+                </script>
+                <% } %>
+        </div>
+
+        <%- include("partials/blog-footer.ejs") -%>
+            <style>
+                .img-responsive {
+                    height: 15rem;
+                }
+            </style>
+    </div>
+    </div>
+    <%- include("partials/footer.ejs") -%>

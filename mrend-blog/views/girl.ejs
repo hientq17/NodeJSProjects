@@ -1,0 +1,109 @@
+<%- include("partials/header") -%>
+    <script>
+        document.getElementById('girl-nav').classList.add("fh5co-active");
+    </script>
+
+    <link href="/lightbox2/src/css/lightbox.css" rel="stylesheet" />
+    <script src="/lightbox2/src/js/lightbox.js"></script>
+    <script>
+        lightbox.option({
+            'resizeDuration': 200,
+            'wrapAround': true,
+            'fitImagesInViewport': true,
+            'positionFromTop': 0
+        })
+    </script>
+
+    <div id="fh5co-main">
+        <div class="fh5co-narrow-content">
+            <div style="width: 100%;">
+                <h2 style="float: left" class="fh5co-heading animate-box" data-animate-effect="fadeInLeft">VITAMIN SÁNG MẮT</h2>
+                <span style="float: right; color: black; font-size: 1.5rem;"><button onclick="displayForm()">Đóng góp ảnh</button></span>
+                <%- include("partials/newGirl") -%>
+            </div>
+            <div class="row row-bottom-padded-md" style="clear:both">
+                <% girls.forEach(girl => { %>
+                    <a id="lightbox-image-<%= girl.url %>" style="display: none;" href="<%= girl.url %>" data-lightbox="image-1" data-title="<%= girl.name %>"></a>
+                    <div class="col-md-3 col-sm-6 col-padding text-center animate-box">
+                        <a class="work image-popup" style="background-image: url(<%= girl.url %>);">
+                            <div class="desc">
+                                <h3>
+                                    <%= girl.name %>
+                                </h3>
+                                <span class="view-image" onclick="openImage('<%= girl.url %>')">View image</span>
+                                <style>
+                                    .view-image:hover {
+                                        cursor: pointer;
+                                    }
+                                </style>
+                                <script>
+                                    function openImage(x) {
+                                        document.getElementById('lightbox-image-' + x).click();
+                                    }
+                                </script>
+                            </div>
+                        </a>
+                    </div>
+                    <% }) %>
+            </div>
+        </div>
+
+        <nav aria-label="..." style="font-size: 1.5rem;width: 30%; margin: auto">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="pagination-page-link" href="/girl/page<%= pagination.pageNum - 1 %>" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+                <li class="page-item active"><a class="pagination-page-link" href="/girl/page1">1</a></li>
+                <% for(i=2; i<=pagination.pageTotal; i++) { %>
+                    <li class="page-item">
+                        <a class="pagination-page-link" href="/girl/page<%= i %>">
+                            <%= i %>
+                        </a>
+                    </li>
+                    <% } %>
+                        <li class="page-item">
+                            <a class="pagination-page-link" href="/girl/page<%= parseInt(pagination.pageNum) + 1 %>" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </li>
+            </ul>
+        </nav>
+
+        <div>
+            <input type="hidden" id="pageNum" value="<%= pagination.pageNum %>" />
+            <script>
+                //highlight the current
+                $(".page-item").each(function(index, element) {
+                    $(element).removeClass('active');
+                });
+                $(".page-item").eq($('#pageNum').val()).addClass('active');
+            </script>
+        </div>
+        <div>
+            <% if(!pagination.prev){ %>
+                <script>
+                    //disable previous button
+                    $(".page-item").eq(0).addClass('disabled');
+                    $(".pagination-page-link").eq(0).removeAttr("href");
+                </script>
+                <% } %>
+        </div>
+        <div>
+            <input type="hidden" id="pageNext" value="<%= pagination.pageTotal+1 %>" />
+            <% if(!pagination.next ){ %>
+                <script>
+                    //disable next button
+                    $(".page-item").eq($('#pageNext').val()).addClass('disabled');
+                    $(".pagination-page-link").eq($('#pageNext').val()).removeAttr("href");
+                </script>
+                <% } %>
+        </div>
+    </div>
+
+    <%- include("partials/footer") -%>
+
+        </html>
