@@ -832,7 +832,7 @@ body {
             font-size: 40px;
             height: 100px;
             @media screen and (max-width: $screen-lg) {
-                font-size: 40px;
+                font-size: 10px !important;
             }
         }
     }

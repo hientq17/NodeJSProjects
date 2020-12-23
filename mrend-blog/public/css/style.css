@@ -642,14 +642,26 @@ body.offcanvas .fh5co-nav-toggle {
 }
 
 .work .desc {
-    display: table-cell;
-    vertical-align: middle;
-    height: 270px;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
     background: #fff;
     opacity: 0;
     -webkit-transition: 0.3s;
     -o-transition: 0.3s;
     transition: 0.3s;
+}
+
+.desc-mobile-view {
+    display: none;
+    margin-top: 10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .work .desc h3 {
@@ -662,7 +674,7 @@ body.offcanvas .fh5co-nav-toggle {
 
 .work .desc span {
     display: block;
-    color: #999999;
+    color: rgba(0, 0, 0, 0.8);
     font-size: 12px;
     -webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
     transition: transform 0.3s, opacity 0.3s;
@@ -670,24 +682,20 @@ body.offcanvas .fh5co-nav-toggle {
     transform: translate3d(0, 15px, 0);
 }
 
-@media screen and (max-width: 768px) {
-    .work .desc {
-        opacity: 1;
-        background: transparent !important;
-    }
-    .work .desc h3 {
-        -webkit-transform: translate3d(0, 0, 0);
-        transform: translate3d(0, 0, 0);
-        color: #fff;
-    }
-    .work .desc span {
-        -webkit-transform: translate3d(0, 0, 0);
-        transform: translate3d(0, 0, 0);
-    }
+.work:hover .desc {
+    opacity: 0.5;
 }
 
-.work:hover .desc {
-    opacity: 1;
+@media screen and (max-width: 600px) {
+    .work .desc {
+        display: none;
+    }
+    .work:hover .desc {
+        opacity: 0;
+    }
+    .desc-mobile-view {
+        display: block;
+    }
 }
 
 .work:hover .desc h3 {
@@ -911,12 +919,6 @@ body.offcanvas .fh5co-nav-toggle {
     height: 100px;
 }
 
-@media screen and (max-width: 1200px) {
-    .fh5co-feature .fh5co-icon i {
-        font-size: 40px;
-    }
-}
-
 .fh5co-feature .fh5co-text {
     padding-left: 120px;
     width: 100%;
@@ -935,6 +937,34 @@ body.offcanvas .fh5co-nav-toggle {
     font-size: 14px;
     letter-spacing: .2em;
     text-transform: uppercase;
+}
+
+@media screen and (max-width: 1200px) {
+    .fh5co-feature .fh5co-icon i {
+        font-size: 30px;
+        height: 80px;
+    }
+    .fh5co-feature .fh5co-icon {
+        width: 80px;
+        height: 80px;
+    }
+    .fh5co-feature .fh5co-text {
+        padding-left: 100px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .fh5co-feature .fh5co-icon i {
+        font-size: 20px;
+        height: 50px;
+    }
+    .fh5co-feature .fh5co-icon {
+        width: 50px;
+        height: 50px;
+    }
+    .fh5co-feature .fh5co-text {
+        padding-left: 70px;
+    }
 }
 
 .fh5co-feature.fh5co-feature-sm .fh5co-text {
