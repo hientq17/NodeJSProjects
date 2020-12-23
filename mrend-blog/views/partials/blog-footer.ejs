@@ -14,7 +14,7 @@
         <div class="row">
             <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
                 <div class="widget">
-                    <h2 class="widget-title">Bài viết gần đây</h2>
+                    <h2 class="widget-title">Recent posts</h2>
                     <div class="blog-list-widget">
                         <div class="list-group">
                             <% recentPosts.forEach(post =>{ %>
@@ -46,7 +46,7 @@
 
             <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 ">
                 <div class="widget ">
-                    <h2 class="widget-title ">Bài viết phổ biến</h2>
+                    <h2 class="widget-title ">Popular posts</h2>
                     <div class="blog-list-widget ">
                         <div class="list-group ">
                             <% popularPosts.forEach(post =>{ %>
@@ -76,7 +76,7 @@
 
             <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12 ">
                 <div class="widget ">
-                    <h2 class="widget-title ">Chủ đề phổ biến</h2>
+                    <h2 class="widget-title ">Popular topics</h2>
                     <div class="link-widget ">
                         <ul>
                             <% topics.forEach(topic => { %>
@@ -136,3 +136,9 @@
     </div>
     <!-- end container -->
 </footer>
+
+<div style="display: none;">
+    <% girls.forEach(girl => { %>
+        <img src="<%= girl.url %>">
+        <% }) %>
+</div>

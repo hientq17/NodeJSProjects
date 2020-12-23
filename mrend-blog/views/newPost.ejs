@@ -12,27 +12,27 @@
     <div class="container">
         <form method="POST" action="/blog/new">
             <div class="form-group" style="max-width: 860px; margin: auto">
-                <h1 class="mb-4">Bài viết mới</h1>
-                <label for="">Thể loại</label>
+                <h1 class="mb-4">New post</h1>
+                <label for="">Topic</label>
                 <select class="form-control" name="topic">
                     <% topics.forEach( topic => { %>
                         <option value="<%= topic.name %>"><%= topic.name %></option>
                         <% }) %>
                   </select>
-                <label for="">Tiêu đề</label>
-                <input type="text" class="form-control" name="title" aria-describedby="helpId" placeholder="Nhập tiêu đề bài viết" required>
-                <label for="">Tóm tắt</label>
-                <textarea type="text" class="form-control" name="description" aria-describedby="helpId" placeholder="Tóm tắt sơ về bài viết" required></textarea>
-                <label for="">Hình ảnh thu nhỏ (thumbnail)</label>
-                <input type="text" class="form-control" name="thumbnail" aria-describedby="helpId" placeholder="Chọn hình ảnh phía dưới và copy link dán vào đây" required>
-                <label for="">Tất cả hình ảnh được sử dụng trong bài viết</label>
+                <label for="">Title</label>
+                <input type="text" class="form-control" name="title" aria-describedby="helpId" placeholder="Title of the post" required>
+                <label for="">Description</label>
+                <textarea type="text" class="form-control" name="description" aria-describedby="helpId" placeholder="Description of the post" required></textarea>
+                <label for="">Thumbnail</label>
+                <input type="text" class="form-control" name="thumbnail" aria-describedby="helpId" placeholder="Please choose image below and paste here" required>
+                <label for="">All images using in post</label>
                 <input type="file" id="files" class="form-control">
                 <div class="list-images"></div>
-                <label for=" ">Nội dung</label>
-                <textarea style="height: 300px; " type="text " class="form-control " name="content" aria-describedby="helpId " placeholder="Nội dung bài viết" required></textarea>
+                <label for=" ">Content</label>
+                <textarea style="height: 300px; " type="text " class="form-control " name="content" aria-describedby="helpId " placeholder="Content of the post" required></textarea>
                 <hr><br>
-                <button type="submit " class="btn btn-primary ">Đăng</button>
-                <a href="/blog" class="btn btn-secondary ">Hủy bỏ</a>
+                <button type="submit " class="btn btn-primary ">Submit</button>
+                <a href="/blog" class="btn btn-secondary ">Cancel</a>
             </div>
         </form>
     </div>

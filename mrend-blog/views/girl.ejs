@@ -17,34 +17,58 @@
     <div id="fh5co-main">
         <div class="fh5co-narrow-content">
             <div style="width: 100%;">
-                <h2 style="float: left" class="fh5co-heading animate-box" data-animate-effect="fadeInLeft">VITAMIN SÁNG MẮT</h2>
-                <span style="float: right; color: black; font-size: 1.5rem;"><button onclick="displayForm()">Đóng góp ảnh</button></span>
+                <h2 style="float: left" class="fh5co-heading animate-box" data-animate-effect="fadeInLeft">Picture Collection</h2>
+                <span style="float: right; color: black; font-size: 1.5rem;">
+                    <a id="upload-image-button" onclick="displayForm()">
+                        Upload new image
+                        <i class=" icon-arrow-right3 "></i>
+                    </a>
+                </span>
+                <style>
+                    #upload-image-button {
+                        text-transform: uppercase;
+                        letter-spacing: 2px;
+                        color: #000
+                    }
+                    
+                    #upload-image-button:hover {
+                        cursor: pointer;
+                        color: #0a58ca;
+                    }
+                </style>
                 <%- include("partials/newGirl") -%>
             </div>
             <div class="row row-bottom-padded-md" style="clear:both">
                 <% girls.forEach(girl => { %>
                     <a id="lightbox-image-<%= girl.url %>" style="display: none;" href="<%= girl.url %>" data-lightbox="image-1" data-title="<%= girl.name %>"></a>
                     <div class="col-md-3 col-sm-6 col-padding text-center animate-box">
-                        <a class="work image-popup" style="background-image: url(<%= girl.url %>);">
-                            <div class="desc">
+                        <a class="work image-popup">
+                            <div style="width: 100%; height: 300px; display: flex; align-items: center;">
+                                <img src="<%= girl.url %>" width="100%" height="auto">
+                            </div>
+                            <div class="desc" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; 
+                                display: flex; align-items: center; justify-content: center; flex-direction: column">
                                 <h3>
+                                    Name:
                                     <%= girl.name %>
                                 </h3>
-                                <span class="view-image" onclick="openImage('<%= girl.url %>')">View image</span>
-                                <style>
-                                    .view-image:hover {
-                                        cursor: pointer;
-                                    }
-                                </style>
-                                <script>
-                                    function openImage(x) {
-                                        document.getElementById('lightbox-image-' + x).click();
-                                    }
-                                </script>
+                                <div>
+                                    <span class="view-image" onclick="openImage('<%= girl.url %>')"><b>View image</b></span>
+                                </div>
                             </div>
                         </a>
                     </div>
                     <% }) %>
+                        <style>
+                            .view-image:hover {
+                                cursor: pointer;
+                            }
+                        </style>
+                        <script>
+                            function openImage(x) {
+                                document.getElementById('lightbox-image-' + x).click();
+                            }
+                        </script>
             </div>
         </div>
 

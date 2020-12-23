@@ -29,10 +29,13 @@ app.set('views', __dirname + "/views"); //set view directory views
 app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 app.use(express.static("public"));
 
+const Girl = require('./model/girl');
+
 //create middleware
-app.use(function(req, res, next) {
+app.use(async function(req, res, next) {
     res.locals = {
-        moment: moment
+        moment: moment,
+        girls: await Girl.getGirlList()
     };
     next();
 });
@@ -53,6 +56,6 @@ app.use('/blog', blogRouter);
 app.use('/about', aboutRouter);
 app.use('/contact', contactRouter);
 
-app.listen(3000, function() {
+app.listen(process.env.PORT || 3000, function() {
     console.log("Server started on port 3000");
 });

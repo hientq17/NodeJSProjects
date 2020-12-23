@@ -10,7 +10,7 @@
                     <div class="col-md-4">
                         <div class="fh5co-feature fh5co-feature-sm animate-box" data-animate-effect="fadeInLeft">
                             <div class="fh5co-icon">
-                                <i class="icon-globe"></i>
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
                             </div>
                             <div class="fh5co-text">
                                 <p>
@@ -54,7 +54,7 @@
 
             <div class="row">
                 <div class="col-md-4">
-                    <h2>Ý kiến đóng góp của bạn</h2>
+                    <h2>Feedback</h2>
                 </div>
             </div>
             <form action="">
@@ -63,21 +63,21 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="name" placeholder="Tên của bạn">
+                                    <input type="text" class="form-control" name="name" placeholder="Your name">
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="email" placeholder="Email của bạn">
+                                    <input type="text" class="form-control" name="email" placeholder="Email address">
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="phone" placeholder="Số điện thoại">
+                                    <input type="text" class="form-control" name="phone" placeholder="Your phone">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <textarea name="" id="message" cols="30" rows="7" class="form-control" placeholder="Nội dung"></textarea>
+                                    <textarea name="" id="message" cols="30" rows="7" class="form-control" placeholder="Content"></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <input type="button" onclick="sendMessage()" class="btn btn-primary btn-md" value="Gửi">
+                                    <input type="button" onclick="sendMessage()" class="btn btn-primary btn-md" value="Send">
                                 </div>
                             </div>
                         </div>
@@ -99,19 +99,19 @@
             var message = {};
             message.name = $("input[name='name']").val();
             if (!message.name) {
-                $("input[name='name']").attr('placeholder', 'Vui lòng nhập tên');
+                $("input[name='name']").attr('placeholder', 'Please input name');
                 $("input[name='name']").focus();
                 return;
             }
             message.email = $("input[name='email']").val();
             if (!message.email) {
-                $("input[name='email']").attr('placeholder', 'Vui lòng nhập email');
+                $("input[name='email']").attr('placeholder', 'Please input email');
                 $("input[name='email']").focus();
                 return;
             }
             message.content = $("#message").val();
             if (!message.content) {
-                $("#message").attr('placeholder', 'Vui lòng nhập nội dung');
+                $("#message").attr('placeholder', 'Please input content');
                 $("#message").focus();
                 return;
             }
@@ -126,22 +126,22 @@
                     if (JSON.parse(response) == "success") {
                         Swal.fire({
                             icon: 'success',
-                            title: 'Gửi ý kiến thành công...',
-                            text: 'Cảm ơn bạn đã đóng góp ý kiến!',
+                            title: 'Send feedback successfully...',
+                            text: 'Thank you for your feedback!',
                             showConfirmButton: true
                         })
                     } else {
                         Swal.fire({
                             icon: 'error',
                             title: 'Oops...',
-                            text: 'Có lỗi xảy ra!',
-                            footer: 'Vui lòng thử lại sau.'
+                            text: 'Something error!',
+                            footer: 'Please try again.'
                         })
                     }
                 },
                 error: function(response) {
                     Swal.close();
-                    alert('Lỗi server! Vui lòng thử lại sau')
+                    alert('Server error! Please try again.')
                 }
             });
         }

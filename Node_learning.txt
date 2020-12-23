@@ -68,7 +68,7 @@ const: it does not proctect element inside var
 	const express = require('express');
 	const app = express(); //initialize express
 	npm install body-parse //type in cmd:
-	const bodyParse = require('body-parse');
+	const bodyParse = require('body-parser');
 	//must define the public folder to store static files(css,js,img...)
 	app.use(express.static(__dirname + '/public'));
 	//get access data from view(html) as a object inside bracket
@@ -112,7 +112,7 @@ const: it does not proctect element inside var
 	git add .
 	//create heroku app
 	heroku apps:create <app-name>
-	//create 
+	//set git reomite heroku to heroku app 
 	heroku git:remote -a <app-name>
 	//commit and push to heroku git
 	git commit -m "Initial commit"

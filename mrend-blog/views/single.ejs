@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <!-- Site Metas -->
-<title>Cloapedia - Stylish Magazine Blog Template</title>
+<title>Mr.End - Blog</title>
 <meta name="keywords" content="">
 <meta name="description" content="">
 <meta name="author" content="">
@@ -62,7 +62,7 @@
             <div class="card card-block">
                 <div class="newsletter-widget text-center">
                     <form action="#" method="post" class="form-inline">
-                        <input type="text" class="form-control" placeholder="Bạn đang tìm kiếm điều gì?">
+                        <input type="text" class="form-control" placeholder="What are you looking for?">
                         <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
                     </form>
                 </div>
@@ -94,10 +94,10 @@
                     <div class="collapse navbar-collapse justify-content-md-center" id="/cloapediamenu">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link" href="/">Trang chủ</a>
+                                <a class="nav-link" href="/">Home</a>
                             </li>
                             <li class="nav-item dropdown has-submenu">
-                                <a class="nav-link dropdown-toggle" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Thể loại</a>
+                                <a class="nav-link dropdown-toggle" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Topic</a>
                                 <ul class="dropdown-menu" aria-labelledby="dropdown02">
                                     <% topics.forEach(topic => { %>
                                         <li>
@@ -109,13 +109,13 @@
                                 </ul>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link color-pink-hover" href="/girl">Vitamin C</a>
+                                <a class="nav-link color-pink-hover" href="/girl">Collection</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link color-red-hover" href="/about">Giới thiệu</a>
+                                <a class="nav-link color-red-hover" href="/about">About me</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link color-aqua-hover" href="/contact">Liên hệ</a>
+                                <a class="nav-link color-aqua-hover" href="/contact">Contact</a>
                             </li>
                         </ul>
                     </div>
@@ -151,8 +151,8 @@
 
                                 <div class="post-sharing">
                                     <ul class="list-inline">
-                                        <li><a class="fb-button btn btn-primary"><i class="fa fa-facebook"></i> <span class="down-mobile">Chia sẻ trên Facebook</span></a></li>
-                                        <li><a class="tw-button btn btn-primary"><i class="fa fa-twitter"></i> <span class="down-mobile">Chia sẻ trên Twitter</span></a></li>
+                                        <li><a class="fb-button btn btn-primary"><i class="fa fa-facebook"></i> <span class="down-mobile">Share on Facebook</span></a></li>
+                                        <li><a class="tw-button btn btn-primary"><i class="fa fa-twitter"></i> <span class="down-mobile">Share on Twitter</span></a></li>
                                     </ul>
                                 </div>
                                 <!-- end post-sharing -->
@@ -187,8 +187,8 @@
 
                                 <div class="post-sharing">
                                     <ul class="list-inline">
-                                        <li><a class="fb-button btn btn-primary"><i class="fa fa-facebook"></i> <span class="down-mobile">Chia sẻ trên Facebook</span></a></li>
-                                        <li><a class="tw-button btn btn-primary"><i class="fa fa-twitter"></i> <span class="down-mobile">Chia sẻ trên Twitter</span></a></li>
+                                        <li><a class="fb-button btn btn-primary"><i class="fa fa-facebook"></i> <span class="down-mobile">Share on Facebook</span></a></li>
+                                        <li><a class="tw-button btn btn-primary"><i class="fa fa-twitter"></i> <span class="down-mobile">Share on Twitter</span></a></li>
                                     </ul>
                                 </div>
                                 <!-- end post-sharing -->
@@ -197,7 +197,7 @@
                             <hr>
                             <hr class="invis1">
                             <div class="custombox clearfix">
-                                <h4 class="small-title">Có thể bạn sẽ thích</h4>
+                                <h4 class="small-title">You may also like</h4>
                                 <div class="row">
                                     <% relatedPosts.forEach(post => { %>
                                         <div class="col-lg-6">
@@ -236,7 +236,7 @@
 
                             <div class="custombox clearfix">
                                 <h4 class="small-title">
-                                    <span id="comment-quantity"><%= post.comment.length %></span> bình luận</h4>
+                                    <span id="comment-quantity"><%= post.comment.length %></span> comment(s)</h4>
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="comments-list">
@@ -251,9 +251,9 @@
                                                         <p>
                                                             <%= comment.content %>
                                                         </p>
-                                                        <button onclick="showReply('<%= comment.content %>','<%= comment.author.name %>','<%= comment._id %>')" class="btn btn-primary btn-sm">Trả lời </button>&emsp;
+                                                        <button onclick="showReply('<%= comment.content %>','<%= comment.author.name %>','<%= comment._id %>')" class="btn btn-primary btn-sm">Reply</button>&emsp;
                                                         <a onmouseover="this.style.cursor = 'pointer'" onclick="displayReply('<%= comment._id %>')">
-                                                            <span id="reply-comment-quantity-<%= comment._id %>"><%= comment.replyComment.length %></span> câu trả lời
+                                                            <span id="reply-comment-quantity-<%= comment._id %>"><%= comment.replyComment.length %></span> answer(s)
                                                         </a>
                                                     </div>
                                                 </div>
@@ -285,10 +285,10 @@
                             <hr class="invis1">
 
                             <div class="custombox clearfix">
-                                <h4 class="small-title">Viết bình luận</h4>
-                                <p style="display: none;" id="reply-comment-notify">Trả lời cho bình luận
+                                <h4 class="small-title">Leave a Reply</h4>
+                                <p style="display: none;" id="reply-comment-notify">Answering for
                                     <i id="reply-comment-content"></i>
-                                    <button id="button-cancel">Hủy</button>
+                                    <button id="button-cancel">Cancel</button>
                                 </p>
                                 <style>
                                     #button-cancel {
@@ -307,10 +307,10 @@
                                         <form class="form-wrapper">
                                             <input type="hidden" name="postId" value="<%= post.id %>">
                                             <input type="hidden" name="commentId">
-                                            <input type="text" class="form-control" name="authorName" placeholder="Tên của bạn">
-                                            <input type="text" class="form-control" name="authorEmail" placeholder="Email">
-                                            <textarea class="form-control" name="commentContent" placeholder="Bình luận của bạn"></textarea>
-                                            <button type="submit" name="send-comment" value="comment" class="btn btn-primary">Gửi</button>
+                                            <input type="text" class="form-control" name="authorName" placeholder="Your name">
+                                            <input type="text" class="form-control" name="authorEmail" placeholder="Email address">
+                                            <textarea class="form-control" name="commentContent" placeholder="Your comment"></textarea>
+                                            <button type="submit" name="send-comment" value="comment" class="btn btn-primary">Submit comment</button>
                                         </form>
                                     </div>
                                 </div>
@@ -354,14 +354,14 @@
                                 comment.postId = $("input[name='postId']").val();
                                 comment.authorName = $("input[name='authorName']").val();
                                 if (!comment.authorName) {
-                                    $("input[name='authorName']").attr('placeholder', 'Vui lòng nhập tên');
+                                    $("input[name='authorName']").attr('placeholder', 'Please input name');
                                     $("input[name='authorName']").focus();
                                     return;
                                 }
                                 comment.authorEmail = $("input[name='authorEmail']").val();
                                 comment.content = $("textarea[name='commentContent']").val();
                                 if (!comment.content) {
-                                    $("textarea[name='commentContent']").attr('placeholder', 'Vui lòng nhập nội dung');
+                                    $("textarea[name='commentContent']").attr('placeholder', 'Please input content');
                                     $("textarea[name='commentContent']").focus();
                                     return;
                                 }
@@ -376,8 +376,8 @@
                                             Swal.fire({
                                                 icon: 'error',
                                                 title: 'Oops...',
-                                                text: 'Có lỗi xảy ra!',
-                                                footer: 'Vui lòng thử lại sau.'
+                                                text: 'Something error!',
+                                                footer: 'Please try again.'
                                             })
                                         } else {
                                             var comment = JSON.parse(response);
@@ -408,7 +408,7 @@
                                     },
                                     error: function(response) {
                                         Swal.close();
-                                        alert('Lỗi server! Vui lòng thử lại sau')
+                                        alert('Server error! Please try again')
                                     }
                                 });
                             }
@@ -419,14 +419,14 @@
                                 replyComment.commentId = $("input[name='commentId']").val();
                                 replyComment.authorName = $("input[name='authorName']").val();
                                 if (!replyComment.authorName) {
-                                    $("input[name='authorName']").attr('placeholder', 'Vui lòng nhập tên');
+                                    $("input[name='authorName']").attr('placeholder', 'Please input name');
                                     $("input[name='authorName']").focus();
                                     return;
                                 }
                                 replyComment.authorEmail = $("input[name='authorEmail']").val();
                                 replyComment.content = $("textarea[name='commentContent']").val();
                                 if (!replyComment.content) {
-                                    $("textarea[name='commentContent']").attr('placeholder', 'Vui lòng nhập nội dung');
+                                    $("textarea[name='commentContent']").attr('placeholder', 'Please input content');
                                     $("textarea[name='commentContent']").focus();
                                     return;
                                 }
@@ -441,8 +441,8 @@
                                             Swal.fire({
                                                 icon: 'error',
                                                 title: 'Oops...',
-                                                text: 'Có lỗi xảy ra!',
-                                                footer: 'Vui lòng thử lại sau.'
+                                                text: 'Something error!',
+                                                footer: 'Please try again.'
                                             })
                                         } else {
                                             var replyComment = JSON.parse(response);
@@ -469,7 +469,7 @@
                                     },
                                     error: function(response) {
                                         Swal.close();
-                                        alert('Lỗi server! Vui lòng thử lại sau')
+                                        alert('Server error! Please try again')
                                     }
                                 });
                             }
@@ -480,10 +480,10 @@
                     <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
                         <div class="sidebar">
                             <div class="widget">
-                                <h2 class="widget-title">Tìm kiếm</h2>
+                                <h2 class="widget-title">Search</h2>
                                 <form class="form-inline search-form">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Tìm kiếm trên trang này">
+                                        <input type="text" class="form-control" placeholder="Search on this site">
                                     </div>
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
                                 </form>
@@ -491,7 +491,7 @@
                             <!-- end widget -->
 
                             <div class="widget">
-                                <h2 class="widget-title">Bài viết gần đây</h2>
+                                <h2 class="widget-title">Recent posts</h2>
                                 <div class="blog-list-widget">
                                     <div class="list-group">
                                         <% recentPosts.forEach(post =>{ %>
@@ -518,7 +518,7 @@
                             </div>
                             <!-- end widget -->
                             <div class="widget">
-                                <h2 class="widget-title">Quảng cáo</h2>
+                                <h2 class="widget-title">Advertisement</h2>
                                 <div class="banner-spot clearfix">
                                     <div class="banner-img">
                                         <img src="/cloapedia/images/advertisement.jpg" alt="" class="img-fluid">
@@ -530,7 +530,7 @@
                             <!-- end widget -->
 
                             <div class="widget">
-                                <h2 class="widget-title">Chủ đề phổ biến</h2>
+                                <h2 class="widget-title">Popular topics</h2>
                                 <div class="link-widget">
                                     <ul>
                                         <% topics.forEach( topic => { %>
@@ -561,7 +561,7 @@
                 <div class="row">
                     <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
                         <div class="widget">
-                            <h2 class="widget-title">Bài viết gần đây</h2>
+                            <h2 class="widget-title">Recent posts</h2>
                             <div class="blog-list-widget">
                                 <div class="list-group">
                                     <% recentPosts.forEach(post =>{ %>
@@ -585,7 +585,7 @@
 
                     <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 ">
                         <div class="widget ">
-                            <h2 class="widget-title ">Bài viết phổ biến</h2>
+                            <h2 class="widget-title ">Popular posts</h2>
                             <div class="blog-list-widget ">
                                 <div class="list-group ">
                                     <% popularPosts.forEach(post =>{ %>
@@ -609,7 +609,7 @@
 
                     <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 ">
                         <div class="widget ">
-                            <h2 class="widget-title ">Chủ đề phổ biến</h2>
+                            <h2 class="widget-title ">Popular topics</h2>
                             <div class="link-widget ">
                                 <ul>
                                     <% topics.forEach(topic => { %>

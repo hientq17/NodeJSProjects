@@ -2,7 +2,8 @@ const mongoose = require('mongoose')
 
 const schema = new mongoose.Schema({
     name: {
-        type: String
+        type: String,
+        default: 'unknow'
     },
     url: {
         type: String,
@@ -14,7 +15,7 @@ const schema = new mongoose.Schema({
     },
     status: {
         type: Boolean,
-        default: false
+        default: true
     }
 })
 

@@ -7,66 +7,71 @@
         <div class="fh5co-narrow-content">
             <div class="row row-bottom-padded-md">
                 <div class="col-md-5 animate-box" data-animate-effect="fadeInLeft">
-                    <img class="img-responsive" src="<%= contact.image %>">
+                    <img class="img-responsive" src="<%= contact.image %>"> <br>
+                    <a href="<%= contact.cv %>" target="_blank" style="text-transform: uppercase; letter-spacing: 2px; color: #000" onmouseover="this.style.color ='#0a58ca'" onmouseout="this.style.color =' #000'">
+                        View my CV
+                        <i class=" icon-arrow-right3 "></i>
+                    </a>
                 </div>
                 <div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
-                    <h2 class="fh5co-heading">Giới thiệu về tôi</h2>
-                    <p>
-                        <%= contact.description %>
-                    </p>
+                    <h2 class="fh5co-heading" style="margin-bottom: 0 !important">Summary</h2>
+                    <div>
+                        <p style="margin-bottom: 12px">I am currently studying software engineering at FPT University Da Nang, with quite familiar with Java programming language and database management system. Moreover, I was able to get acquainted with C# Winform and self-learning
+                            other frameworks and libraries. </p>
+                        <p>I am considered a team-player because I like to help others and tend to work well within the group. With a passion for learning new languages and technologies, I wish to be in a dynamic and professional working environment in order
+                            to acquire and improve my knowledge about software engineering. The pressure and challenge at work will be my motivation for becoming a professional programmer.</p>
+                    </div>
                 </div>
             </div>
-            <a href="<%= contact.cv %>" target="_blank" style="text-transform: uppercase; letter-spacing: 2px; color: #000" onmouseover="this.style.color ='blue'" onmouseout="this.style.color =' #000'">
-                Xem CV của tôi 
-                <i class=" icon-arrow-right3 "></i>
-            </a>
         </div>
-
-        <div class="fh5co-narrow-content" style="display: none;">
-            <h2 class="fh5co-heading animate-box" data-animate-effect="fadeInLeft">Our Services</h2>
+        <div class="fh5co-narrow-content" style="padding: 0;">
+            <h2 class="fh5co-heading animate-box" data-animate-effect="fadeInLeft">Detail</h2>
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="fh5co-feature animate-box" data-animate-effect="fadeInLeft">
                         <div class="fh5co-icon">
-                            <i class="icon-settings"></i>
+                            <i class="fa fa-graduation-cap" aria-hidden="true"></i>
                         </div>
                         <div class="fh5co-text">
-                            <h3>Strategy</h3>
-                            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. </p>
+                            <h3><b>Education</b></h3>
+                            <div>
+                                <b>FPT University Da Nang</b>
+                                <p>Major: Software Engineering</p>
+                                <p>Achievement: </p>
+                                <ul>
+                                    <li>Good student of 2 semesters: Summer2019, Fall2019</li>
+                                    <li>Excellent student and top 5 student of 2 semesters: Spring2020, Summer2020</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="fh5co-feature animate-box" data-animate-effect="fadeInLeft">
                         <div class="fh5co-icon">
-                            <i class="icon-search4"></i>
+                            <i class="fa fa-code" aria-hidden="true"></i>
                         </div>
                         <div class="fh5co-text">
-                            <h3>Explore</h3>
-                            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. </p>
+                            <h3><b>Technical Skills</b></h3>
+                            <ul>
+                                <li>Programming Language: Java, C# Winform, Javascript</li>
+                                <li>Frameworks & Libraries: Struts 2, Spring Boot, Hibernate</li>
+                                <li>Databases: MS SQL Server, MySQL, MongoDB</li>
+                                <li>Version control: Git</li>
+                                <li>Foreign Languages: Englist</li>
+                                <li>Soft Skills: Time Management, Teamwork</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
-
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="fh5co-feature animate-box" data-animate-effect="fadeInLeft">
                         <div class="fh5co-icon">
-                            <i class="icon-paperplane"></i>
+                            <i class="fa fa-trophy" aria-hidden="true"></i>
                         </div>
                         <div class="fh5co-text">
-                            <h3>Direction</h3>
-                            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="fh5co-feature animate-box" data-animate-effect="fadeInLeft">
-                        <div class="fh5co-icon">
-                            <i class="icon-params"></i>
-                        </div>
-                        <div class="fh5co-text">
-                            <h3>Expertise</h3>
-                            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. </p>
+                            <h3><b>HONORS & AWARDS</b></h3>
+                            <p>Reach the final round of Research Festival (RESFES 2020) hosted by FPT Education.</p>
                         </div>
                     </div>
                 </div>
@@ -76,18 +81,24 @@
         <div class="fh5co-narrow-content">
             <div class="row">
                 <div class="col-md-4 animate-box" data-animate-effect="fadeInLeft">
-                    <h1 class="fh5co-heading-colored">Tìm hiểu thêm</h1>
+                    <h1 class="fh5co-heading-colored">Get in touch</h1>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6 col-md-offset-3 col-md-pull-3 animate-box" data-animate-effect="fadeInLeft">
-                    <p class="fh5co-lead">Bạn nào muốn biết thêm thông tin chi tiết đừng ngần ngại liên hệ cho mình nhé!</p>
-                    <p><a href="https://web.facebook.com/nhochiennhoc/" target="_blank" class="btn btn-primary">Thêm nữa</a></p>
+                    <p class="fh5co-lead">Contact me if you want to know more information!</p>
+                    <p><a href="https://web.facebook.com/nhochiennhoc/" target="_blank" class="btn btn-primary">Get</a></p>
                 </div>
 
             </div>
         </div>
     </div>
     </div>
+
+    <style>
+        .fh5co-text div p {
+            margin-bottom: 0 !important;
+        }
+    </style>
 
     <%- include("partials/footer.ejs") -%>
